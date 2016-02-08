@@ -7,9 +7,8 @@ import java.io.InputStreamReader;
  * Created by Yevgeni on 07.02.2016.
  */
 public class RuntimeProcess {
-    OSType osType = new OSType();
 
-    public void ps() {
+    public void ps(String s) {
         if (OSType.detectOS().equalsIgnoreCase("mac")) {
             try {
                 String line;
@@ -17,14 +16,14 @@ public class RuntimeProcess {
                 BufferedReader input =
                         new BufferedReader(new InputStreamReader(p.getInputStream()));
                 while ((line = input.readLine()) != null) {
-                    System.out.println(line); //<-- Parse data here.
+                    if(line.contains(s))System.out.println(line); //<-- Parse data here.
                 }
                 input.close();
             } catch (Exception err) {
                 err.printStackTrace();
             }
         }
-        if (osType.detectOS().equalsIgnoreCase("win")) {
+        if (OSType.detectOS().equalsIgnoreCase("win")) {
             try {
                 String line;
                 Process p = Runtime.getRuntime().exec
@@ -32,7 +31,7 @@ public class RuntimeProcess {
                 BufferedReader input =
                         new BufferedReader(new InputStreamReader(p.getInputStream()));
                 while ((line = input.readLine()) != null) {
-                    System.out.println(line); //<-- Parse data here.
+                    if(line.contains(s))System.out.println(line); //<-- Parse data here.
                 }
                 input.close();
             } catch (Exception err) {

@@ -28,9 +28,18 @@ public class Main {
                 Properties properties = getProperty.getProp();
                 //Enumeration enuKeys = properties.keys();
                 if (properties.getProperty(s) != null) {
-                    Object obj = Class.forName(properties.getProperty(s)).newInstance();
-                    Method method = obj.getClass().getMethod(s);
-                    method.invoke(obj);
+                    if (s.contains("ps")) {
+                        System.out.println("write process filter:");
+                        String a = scanner.next();
+                        Object obj = Class.forName(properties.getProperty(s)).newInstance();
+                        Method method = obj.getClass().getMethod(s, String.class);
+                        method.invoke(obj, a);
+
+                    } else {
+                        Object obj = Class.forName(properties.getProperty(s)).newInstance();
+                        Method method = obj.getClass().getMethod(s);
+                        method.invoke(obj);
+                    }
                 }
             }
         }
