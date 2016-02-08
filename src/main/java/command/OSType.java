@@ -10,7 +10,8 @@ public class OSType {
     public static String detectOS() {
         if (isWindows()) {
             return checkOS = "win";
-        } else if (isUnix()) return checkOS = "mac";
+        }
+        else if (isUnix()) return checkOS = "mac";
         return checkOS;
     }
 
