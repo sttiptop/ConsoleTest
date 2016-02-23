@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
-<properties>
-    <entry key="ps">command.RuntimeProcess</entry>
-    <entry key="ls">command.ContextPath</entry>
-    <entry key="pwd">command.ContextPathDirectories</entry>
-</properties>

@@ -1,33 +1,43 @@
 package command;
 
+import org.apache.log4j.Logger;
+
 import java.io.File;
 import java.io.IOException;
 
 /**
  * Created by Yevgeni on 07.02.2016.
  */
-public class ContextPathDirectories {
-    File[] files;
+public class ContextPathDirectories implements Command{
+    private static final Logger log = Logger.getLogger(ContextPathDirectories.class);
 
-    public void ls() throws IOException {
-
+    public void execute(){
+        File[] files;
         File path = new File(".");
 
         if (!path.exists()) {
-            throw new IOException(path.getName() + ": No such file or directory");
+            try {
+                throw new IOException(path.getName() + ": No such file or directory");
+            } catch (IOException e) {
+                log.error("Problem with file or directory",e);
+                e.printStackTrace();
+            }
         }
         if (path.isFile()) {
             files = new File[]{path};
         } else {
             files = path.listFiles();
         }
-        print();
+        print(files);
     }
 
-    public void print() {
+    private void print(File[] files) {
         for (File f : files) {
-            System.out.println(f.getName() + ((f.isDirectory()) ? File.separator : "")
-            );
+            String formattedName=f.getName();
+            if(f.isDirectory()){
+                formattedName+=File.separator;
+            }
+            System.out.println(formattedName);
         }
     }
 }
